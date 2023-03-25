@@ -1,0 +1,32 @@
+.conteiner-user{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 2rem;
+    gap: 2rem;
+}
+.title-large{
+    font-size: 4rem;
+    margin-bottom: 3rem;
+}
+.user-links{
+    margin-top: 12rem;
+}
+.link{
+    all: unset;
+    text-align: center;
+    font-size: 1rem;
+    text-decoration: none;
+
+    padding: 0.3rem 1rem;
+
+    background-color: white;
+    color: black;
+    border: 0.03rem solid black;
+    border-radius: 0.5rem;
+    margin-right: 4rem;
+}

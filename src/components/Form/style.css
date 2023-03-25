@@ -1,0 +1,36 @@
+.conteiner-input-component{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+
+    width: 80vw;
+
+    border: 0.03rem solid lightgrey;
+    border-radius: 0.5rem;
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+.label-component{
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    padding-top: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    background-color: lightgrey;
+}
+.input-component{
+    all: unset;
+    width: 80%;
+    padding: 1rem;
+    position: relative;
+}
+.error-message{
+    position: absolute;
+    left: 15rem;
+    top: 3.5rem;
+    color: red;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
