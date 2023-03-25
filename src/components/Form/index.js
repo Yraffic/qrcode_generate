@@ -21,7 +21,7 @@ export const Forms = () => {
     const [nameQrCode, setNameQrCode] = useState('')
     const [qrCode, setQrCode] = useState('')
     const [qrcodeLink, setQrCodeLink] = useState('')
-
+    
     const handleGenerate = (link_url)=>{
         toDataURL(link_url,{
             width: 600,
@@ -98,7 +98,7 @@ export const Forms = () => {
             >
                <a 
                href={qrcodeLink}
-               download={`QrCode.png`}
+               download={`${nameQrCode}-qrcode.png`}
                > Gerenate Image</a>
             </Button>
         </form>

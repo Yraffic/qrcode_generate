@@ -12,7 +12,6 @@ export function PageGenerate() {
         QR Code Image Generator
       </h1>
       <Forms />
-      
     </div>
   );
 }
