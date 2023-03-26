@@ -3,7 +3,7 @@ import './style.css'
 import { useForm } from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import {toDataURL} from 'qrcode'
+import {toCanvas, toDataURL} from 'qrcode'
 import { useState } from 'react';
 import QRCode from 'react-qr-code';
 
@@ -17,9 +17,6 @@ export const Forms = () => {
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(validateForms)
     })
-    const elementQrCode = false
-    const [nameQrCode, setNameQrCode] = useState('')
-    const [qrCode, setQrCode] = useState('')
     const [qrcodeLink, setQrCodeLink] = useState('')
     
     const handleGenerate = (link_url)=>{
@@ -27,19 +24,50 @@ export const Forms = () => {
             width: 600,
             margin: 3
         }, function(err, url){
-            setQrCodeLink(`http://localhost:3000/${url}`)
+            if(err){
+            return    console.log(err)
+            }
+           return setQrCodeLink(url)
+
         })
     }
-    const form = (data)=>{
-        setQrCode(`http://localhost:3000/${data.name}`)
-        handleGenerate(data.name)
-        setNameQrCode(data.name)
+    
+    const download = async (user)=>{
+        handleGenerate(`http://localhost:3000/${user}`);
+        
+        const img = new Image();
+        img.src = qrcodeLink;
+        img.width = '300px'
+        img.height = '300px'
+        
+        img.onload = () => {
+            const link = document.createElement('a');
+            link.href = qrcodeLink;
+            link.download = `${user}-qrcode.png`;
+            
+            link.appendChild(img);
+            
+            document.body.appendChild(link);
+            
+            link.click();
+            
+            document.body.removeChild(link);
+          }
     }
+
+    const form = async (data) => {
+        const user = data.name
+        
+        // gera o QR Code
+       download(user)
+      }
+      
+      
+   
 
     return (
         <form onSubmit={handleSubmit(form)}>
             <div className='conteiner-input-component' >
-                {elementQrCode && <QRCode value={qrCode} />}
                 <div className="label-component">
                     <label htmlFor='name' >
                         name
@@ -96,10 +124,7 @@ export const Forms = () => {
                 type='submit'
                 width='30%'
             >
-               <a 
-               href={qrcodeLink}
-               download={`${nameQrCode}-qrcode.png`}
-               > Gerenate Image</a>
+               Genereate Image
             </Button>
         </form>
     )

@@ -26,11 +26,19 @@
 }
 .error-message{
     position: absolute;
-    left: 15rem;
+    left: 10rem;
     top: 3.5rem;
     color: red;
 }
-a{
+
+.btn{
+    height: 3rem;
+    width: 30rem;
+    text-align: center;
     text-decoration: none;
     color: black;
+    cursor: pointer;
+    background-color: white;
+    border: 0.03rem solid black;
+    border-radius: 0.5rem;
 }
