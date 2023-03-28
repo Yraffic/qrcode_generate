@@ -1,8 +1,8 @@
 
-import { Link, NavLink, useParams } from 'react-router-dom'
-import './style.css'
-import {api} from '../../services/api'
 import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { api } from '../../services/api'
+import './style.css'
 
 export const User = ()=>{
     const [data, setData]= useState([])
