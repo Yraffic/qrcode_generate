@@ -4,29 +4,28 @@ import { Link, useParams } from 'react-router-dom'
 import { api } from '../../services/api'
 import './style.css'
 
-export const User = ()=>{
-    const [user, setUser]= useState([])
+export const User = () => {
+    const [user, setUser] = useState([])
     const [search, setSearch] = useState(false)
-    const {name, id} = useParams()
+    const { name, id } = useParams()
 
-    const gertUse = async()=>{
-        try {
-            const user = await api(`${name}/${id}`)
+    useEffect(() => {
+        const gertUse = async () => {
+            try {
+                const user = await api(`${name}/${id}`)
 
-            setUser(user.data)
-            setSearch(true)
-            return
-        } catch (error) {
-            console.log(error)
+                setUser(user.data)
+                setSearch(true)
+                return
+            } catch (error) {
+                console.log(error)
+            }
         }
-    }
 
-    useEffect(()=>{
         gertUse()
-        console.log(data)
-    },[search])
+    }, [search, id, name])
 
-    return(
+    return (
         <div className='conteiner-user'>
             <header>
                 <h4>Hello, my name is {user.name}</h4>
@@ -39,15 +38,15 @@ export const User = ()=>{
                     {user.description}
                 </p>
                 <div className='user-links'>
-                    <Link 
-                    className='link'
-                    to={user.github}
+                    <Link
+                        className='link'
+                        to={user.github}
                     >
                         GitHub
                     </Link>
-                    <Link 
-                    className='link'
-                    to={user.linkedin}
+                    <Link
+                        className='link'
+                        to={user.linkedin}
                     >
                         LinkedIn
                     </Link>
