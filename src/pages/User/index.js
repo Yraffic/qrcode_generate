@@ -5,7 +5,7 @@ import { api } from '../../services/api'
 import './style.css'
 
 export const User = ()=>{
-    const [data, setData]= useState([])
+    const [user, setUser]= useState([])
     const [search, setSearch] = useState(false)
     const {name, id} = useParams()
 
@@ -13,7 +13,7 @@ export const User = ()=>{
         try {
             const user = await api(`${name}/${id}`)
 
-            setData(user.data)
+            setUser(user.data)
             setSearch(true)
             return
         } catch (error) {
@@ -29,25 +29,25 @@ export const User = ()=>{
     return(
         <div className='conteiner-user'>
             <header>
-                <h4>Hello, my name is {data.name}</h4>
+                <h4>Hello, my name is {user.name}</h4>
             </header>
             <section>
                 <h1 className='title-large'>
                     My history
                 </h1>
                 <p>
-                    {data.description}
+                    {user.description}
                 </p>
                 <div className='user-links'>
                     <Link 
                     className='link'
-                    to={data.github}
+                    to={user.github}
                     >
                         GitHub
                     </Link>
                     <Link 
                     className='link'
-                    to={data.linkedin}
+                    to={user.linkedin}
                     >
                         LinkedIn
                     </Link>
