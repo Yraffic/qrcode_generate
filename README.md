@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+link to the project : https://buzzvel-qr-code.netlify.app/generate
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
