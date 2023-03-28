@@ -5,11 +5,12 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { Button } from '../Button';
 import './style.css';
+import {api} from '../../services/api'
 
 const validateForms = yup.object().shape({
     name: yup.string().required("required name"),
-    linkedIn: yup.string().required('required linkedIn'),
-    gitHub: yup.string().required('required gitHub'),
+    linkedin: yup.string().required('required linkedIn'),
+    github: yup.string().required('required gitHub'),
     description: yup.string().required('required description')
 })
 
@@ -21,7 +22,7 @@ export const Forms = () => {
 
     const handleGenerate = (link_url) => {
         toDataURL(link_url, {
-            width: 600,
+            width: 300,
             margin: 3
         }, function (err, url) {
             if (err) {
@@ -37,9 +38,7 @@ export const Forms = () => {
 
         const img = new Image();
         img.src = qrcodeLink;
-        img.width = '300px'
-        img.height = '300px'
-
+    
         img.onload = () => {
             const link = document.createElement('a');
             link.href = qrcodeLink;
@@ -56,14 +55,16 @@ export const Forms = () => {
     }
 
     const form = async (data) => {
-        const user = data.name
+       try {
+        const newUser = await api.post('/generate', data)
+        
+        const linkUser = `${newUser.data[0].name}/${newUser.data[0].id}`
 
-        // gera o QR Code
-        download(user)
+        download(linkUser)
+       } catch (error) {
+        alert('erro no servidor!')
+       }
     }
-
-
-
 
     return (
         <form onSubmit={handleSubmit(form)}>
@@ -84,15 +85,15 @@ export const Forms = () => {
             </div>
             <div className='conteiner-input-component' >
                 <div className="label-component">
-                    <label htmlFor='linkedIn' >
+                    <label htmlFor='linkedin' >
                         linkedIn URL
                     </label>
                 </div>
                 <input
                     type='text'
-                    id='linkedIn'
-                    name='linkedIn'
-                    {...register('linkedIn')}
+                    id='linkedin'
+                    name='linkedin'
+                    {...register('linkedin')}
                     className='input-component'
                 />
                 <span
@@ -103,15 +104,15 @@ export const Forms = () => {
             </div>
             <div className='conteiner-input-component' >
                 <div className="label-component">
-                    <label htmlFor='gitHub' >
+                    <label htmlFor='github' >
                         gitHub URL
                     </label>
                 </div>
                 <input
                     type='text'
-                    id='gitHub'
-                    name='gitHub'
-                    {...register('gitHub')}
+                    id='github'
+                    name='github'
+                    {...register('github')}
                     className='input-component'
                 />
                 <span

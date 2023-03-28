@@ -14,7 +14,9 @@
     width: 20%;
     height: 100%;
     text-align: center;
+    font-size: 0.8rem;
     padding-top: 0.5rem;
+    padding-right: 0.5rem;
     border-radius: 0.5rem 0 0 0.5rem;
     background-color: lightgrey;
 }

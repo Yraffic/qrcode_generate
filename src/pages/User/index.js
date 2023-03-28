@@ -1,30 +1,53 @@
 
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 import './style.css'
+import {api} from '../../services/api'
+import { useEffect, useState } from 'react'
 
 export const User = ()=>{
+    const [data, setData]= useState([])
+    const [search, setSearch] = useState(false)
+    const {name, id} = useParams()
+
+    const gertUse = async()=>{
+        try {
+            const user = await api(`${name}/${id}`)
+
+            setData(user.data)
+            setSearch(true)
+            return
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        gertUse()
+        console.log(data)
+    },[search])
+
     return(
         <div className='conteiner-user'>
             <header>
-                <h4>Hello, my name is John</h4>
+                <h4>Hello, my name is {data.name}</h4>
             </header>
             <section>
                 <h1 className='title-large'>
                     My history
                 </h1>
                 <p>
-                    lorem ipsum dolor  sit amet, consectetur
+                    {data.description}
                 </p>
                 <div className='user-links'>
                     <Link 
                     className='link'
-                    to='https://www.google.com'
+                    to={data.github}
                     >
                         GitHub
                     </Link>
                     <Link 
                     className='link'
-                    to='https://www.google.com'
+                    to={data.linkedin}
                     >
                         LinkedIn
                     </Link>
