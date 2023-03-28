@@ -34,7 +34,7 @@ export const Forms = () => {
     }
 
     const download = async (user) => {
-        handleGenerate(`https://buzzvel-qr-code.netlify.app/${user}`);
+        handleGenerate(`https://main--buzzvel-qr-code.netlify.app/${user}`);
 
         const img = new Image();
         img.src = qrcodeLink;
